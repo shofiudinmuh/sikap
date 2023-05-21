@@ -12,7 +12,7 @@
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
-        
+
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
@@ -23,46 +23,57 @@
             </li>
 
             @if (auth()->user()->level == 1)
-            <li class="header">MASTER</li>
+            <li class="header">DATA MASTER</li>
             <li>
-                <a href="{{ route('kategori.index') }}">
-                    <i class="fa fa-cube"></i> <span>Kategori</span>
+                <a href="{{ route('puskesmas.index') }}">
+                    <i class="fa fa-building"></i> <span>Puskesmas</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('produk.index') }}">
-                    <i class="fa fa-cubes"></i> <span>Produk</span>
+                <a href="{{ route('bank.index') }}">
+                    <i class="fa fa-bank"></i> <span>Bank</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('member.index') }}">
-                    <i class="fa fa-id-card"></i> <span>Member</span>
+                <a href="{{ route('jabatan.index') }}">
+                    <i class="fa fa-briefcase"></i> <span>Jabatan</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('supplier.index') }}">
-                    <i class="fa fa-truck"></i> <span>Supplier</span>
+                <a href="{{ route('kota.index') }}">
+                    <i class="fa fa-building"></i> <span>Kota</span>
                 </a>
             </li>
-            <li class="header">TRANSAKSI</li>
             <li>
-                <a href="{{ route('pengeluaran.index') }}">
-                    <i class="fa fa-money"></i> <span>Pengeluaran</span>
+                <a href="{{ route('kecamatan.index') }}">
+                    <i class="fa fa-building"></i> <span>Kecamatan</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('kelurahan.index') }}">
+                    <i class="fa fa-building"></i> <span>Desa/ Kelurahan</span>
+                </a>
+            </li>
+            <li class="header">DATA KADER</li>
+            <li>
+                <a href="{{ route('biodata.index') }}">
+                    <i class="fa fa-id-card"></i> <span>Biodata</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('pembelian.index') }}">
-                    <i class="fa fa-download"></i> <span>Pembelian</span>
+                    <i class="fa fa-file"></i> <span>Data SK</span>
                 </a>
             </li>
+            <li class="header">KEUANGAN</li>
             <li>
                 <a href="{{ route('penjualan.index') }}">
-                    <i class="fa fa-upload"></i> <span>Penjualan</span>
+                    <i class="fa fa-upload"></i> <span>Perhutungan Honor</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('transaksi.index') }}">
-                    <i class="fa fa-cart-arrow-down"></i> <span>Transaksi Aktif</span>
+                    <i class="fa fa-money"></i> <span>Payroll</span>
                 </a>
             </li>
             <li>
@@ -83,7 +94,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route("setting.index") }}">
+                <a href="{{ route('setting.index') }}">
                     <i class="fa fa-cogs"></i> <span>Pengaturan</span>
                 </a>
             </li>

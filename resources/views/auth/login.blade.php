@@ -7,17 +7,20 @@
     <div class="login-box-body">
         <div class="login-logo">
             <a href="{{ url('/') }}">
-                <img src="{{ url($setting->path_logo) }}" alt="logo.png" width="100">
+                <img src="{{ asset('/img/logo.png')}}" alt="logo.png" width="100">
+                <h1>SIKAP</h1>
+                <h4>Sistem Informasi Kader & PPKBD Sidoarajo</h4>
             </a>
         </div>
 
         <form action="{{ route('login') }}" method="post" class="form-login">
             @csrf
             <div class="form-group has-feedback @error('email') has-error @enderror">
-                <input type="email" name="email" class="form-control" placeholder="Email" required value="{{ old('email') }}" autofocus>
+                <input type="email" name="email" class="form-control" placeholder="Email" required
+                    value="{{ old('email') }}" autofocus>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 @error('email')
-                    <span class="help-block">{{ $message }}</span>
+                <span class="help-block">{{ $message }}</span>
                 @else
                 <span class="help-block with-errors"></span>
                 @enderror
@@ -26,9 +29,9 @@
                 <input type="password" name="password" class="form-control" placeholder="Password" required>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 @error('password')
-                    <span class="help-block">{{ $message }}</span>
+                <span class="help-block">{{ $message }}</span>
                 @else
-                    <span class="help-block with-errors"></span>
+                <span class="help-block with-errors"></span>
                 @enderror
             </div>
             <div class="row">

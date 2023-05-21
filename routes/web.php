@@ -2,6 +2,13 @@
 
 use App\Http\Controllers\{
     DashboardController,
+    BankController,
+    BiodataController,
+    KecamatanController,
+    KelurahanController,
+    KotaController,
+    JabatanController,
+    PuskesmasController,
     KategoriController,
     LaporanController,
     ProdukController,
@@ -38,6 +45,27 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'level:1'], function () {
         Route::get('/kategori/data', [KategoriController::class, 'data'])->name('kategori.data');
         Route::resource('/kategori', KategoriController::class);
+
+        Route::get('/biodata/data', [BiodataController::class, 'data'])->name('biodata.data');
+        Route::resource('/biodata', BiodataController::class);
+
+        Route::get('/bank/data', [BankController::class, 'data'])->name('bank.data');
+        Route::resource('/bank', BankController::class);
+
+        Route::get('/jabatan/data', [JabatanController::class, 'data'])->name('jabatan.data');
+        Route::resource('/jabatan', JabatanController::class);
+
+        Route::get('/kota/data', [KotaController::class, 'data'])->name('kota.data');
+        Route::resource('/kota', KotaController::class);
+
+        Route::get('/kecamatan/data', [KecamatanController::class, 'data'])->name('kecamatan.data');
+        Route::resource('/kecamatan', KecamatanController::class);
+
+        Route::get('/kelurahan/data', [KelurahanController::class, 'data'])->name('kelurahan.data');
+        Route::resource('/kelurahan', KelurahanController::class);
+
+        Route::get('/puskesmas/data', [PuskesmasController::class, 'data'])->name('puskesmas.data');
+        Route::resource('/puskesmas', PuskesmasController::class);
 
         Route::get('/produk/data', [ProdukController::class, 'data'])->name('produk.data');
         Route::post('/produk/delete-selected', [ProdukController::class, 'deleteSelected'])->name('produk.delete_selected');
@@ -95,7 +123,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/setting/first', [SettingController::class, 'show'])->name('setting.show');
         Route::post('/setting', [SettingController::class, 'update'])->name('setting.update');
     });
- 
+
     Route::group(['middleware' => 'level:1,2'], function () {
         Route::get('/profil', [UserController::class, 'profil'])->name('user.profil');
         Route::post('/profil', [UserController::class, 'updateProfil'])->name('user.update_profil');

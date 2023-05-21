@@ -15,10 +15,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $kategori = Kategori::count();
+        // $kategori = Kategori::count();
         $produk = Produk::count();
         $supplier = Supplier::count();
-        $member = Member::count();
+        // $member = Member::count();
 
         $tanggal_awal = date('Y-m-01');
         $tanggal_akhir = date('Y-m-d');
@@ -42,7 +42,7 @@ class DashboardController extends Controller
         $tanggal_awal = date('Y-m-01');
 
         if (auth()->user()->level == 1) {
-            return view('admin.dashboard', compact('kategori', 'produk', 'supplier', 'member', 'tanggal_awal', 'tanggal_akhir', 'data_tanggal', 'data_pendapatan'));
+            return view('admin.dashboard', compact('produk', 'supplier', 'tanggal_awal', 'tanggal_akhir', 'data_tanggal', 'data_pendapatan'));
         } else {
             return view('kasir.dashboard');
         }
