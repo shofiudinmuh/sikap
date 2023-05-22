@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Console\Kernel;
+use App\Models\Kecamatan;
+use App\Models\Kota;
 use Illuminate\Http\Request;
 
 class KecamatanController extends Controller
@@ -13,7 +16,9 @@ class KecamatanController extends Controller
      */
     public function index()
     {
-        //
+        $kota = Kota::all()->pluck('nama_kota', 'id_kota');
+
+        return view('kecamatan.index', compact('kota'));
     }
 
     /**
@@ -32,9 +37,34 @@ class KecamatanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function data()
+    {
+        $kecamatan = Kecamatan::leftJoin('kota', 'kota.id_kota', 'kecamatan.id_kota')
+            ->select('kecamatan.*', 'nama_kota')
+            ->get();
+
+        return datatables()
+            ->of($kecamatan)
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($kecamatan) {
+                return '
+                <div class="btn-group">
+                    <button onclick="editForm(`' . route('kecamatan.update', $kecamatan->id_kecamatan) . '`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
+                    <button onclick="deleteData(`' . route('kecamatan.destroy', $kecamatan->id_kecamatan) . '`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                </div>
+                ';
+            })
+            ->rawColumns(['aksi'])
+            ->make(true);
+    }
     public function store(Request $request)
     {
-        //
+        $kecamatan = new Kecamatan();
+        $kecamatan->nama_kecamatan = $request->nama_kecamatan;
+        $kecamatan->id_kota = $request->id_kota;
+        $kecamatan->save();
+
+        return response()->json('Kecamatan berhasil disimpan', 200);
     }
 
     /**
@@ -45,7 +75,9 @@ class KecamatanController extends Controller
      */
     public function show($id)
     {
-        //
+        $kecamatan = Kecamatan::find($id);
+
+        return response()->json($kecamatan);
     }
 
     /**
@@ -68,7 +100,12 @@ class KecamatanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kecamatan = Kecamatan::find($id);
+        $kecamatan->nama_kecamatan = $request->nama_kecamatan;
+        $kecamatan->id_kota = $request->id_kota;
+        $kecamatan->update();
+
+        return response()->json('Data berhasil disimpan', 200);
     }
 
     /**
@@ -79,6 +116,9 @@ class KecamatanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kecamatan = Kecamatan::find($id);
+        $kecamatan->delete();
+
+        return response()->json('Data berhasil dihapus', 200);
     }
 }

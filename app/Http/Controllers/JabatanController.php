@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jabatan;
 use Illuminate\Http\Request;
 
 class JabatanController extends Controller
@@ -13,7 +14,7 @@ class JabatanController extends Controller
      */
     public function index()
     {
-        //
+        return view('jabatan.index');
     }
 
     /**
@@ -21,6 +22,24 @@ class JabatanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function data()
+    {
+        $jabatan = Jabatan::orderBy('id_jabatan', 'desc')->get();
+
+        return datatables()
+            ->of($jabatan)
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($jabatan) {
+                return '
+                <div class="btn-group">
+                    <button onclick="editForm(`' . route('jabatan.update', $jabatan->id_jabatan) . '`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
+                    <button onclick="deleteData(`' . route('jabatan.destroy', $jabatan->id_jabatan) . '`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                </div>
+                ';
+            })
+            ->rawColumns(['aksi'])
+            ->make(true);
+    }
     public function create()
     {
         //
@@ -34,7 +53,12 @@ class JabatanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $jabatan = new Jabatan();
+        $jabatan->nama_jabatan = $request->nama_jabatan;
+        $jabatan->gaji = $request->gaji;
+        $jabatan->save();
+
+        return response()->json('Data berhasil disimpan', 200);
     }
 
     /**
@@ -45,7 +69,9 @@ class JabatanController extends Controller
      */
     public function show($id)
     {
-        //
+        $jabatan = Jabatan::find($id);
+
+        return response()->json($jabatan);
     }
 
     /**
@@ -68,7 +94,12 @@ class JabatanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $jabatan = Jabatan::find($id);
+        $jabatan->nama_jabatan = $request->nama_jabatan;
+        $jabatan->gaji = $request->gaji;
+        $jabatan->update();
+
+        return response()->json('Data berhasil disimpan', 200);
     }
 
     /**
@@ -79,6 +110,9 @@ class JabatanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $jabatan = Jabatan::find($id);
+        $jabatan->delete();
+
+        return response(null, 204);
     }
 }
