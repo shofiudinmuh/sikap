@@ -18,8 +18,9 @@ use App\Http\Controllers\{
     PembelianDetailController,
     PenjualanController,
     PenjualanDetailController,
+    RiwayatJabatanController,
     SettingController,
-    SupplierController,
+    SkController,
     UserController,
 };
 use Illuminate\Support\Facades\Route;
@@ -47,7 +48,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/kategori', KategoriController::class);
 
         Route::get('/biodata/data', [BiodataController::class, 'data'])->name('biodata.data');
+        // Route::get('/biodata/{$id}/riwayat', [BiodataController::class, 'riwayat'])->name('biodata.riwayat');
         Route::resource('/biodata', BiodataController::class);
+        Route::resource('/biodata/riwayatjabatan', RiwayatJabatanController::class);
 
         Route::get('/bank/data', [BankController::class, 'data'])->name('bank.data');
         Route::resource('/bank', BankController::class);
@@ -76,8 +79,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/member/cetak-member', [MemberController::class, 'cetakMember'])->name('member.cetak_member');
         Route::resource('/member', MemberController::class);
 
-        Route::get('/supplier/data', [SupplierController::class, 'data'])->name('supplier.data');
-        Route::resource('/supplier', SupplierController::class);
+        Route::get('/sk/data', [SkController::class, 'data'])->name('sk.data');
+        Route::get('/sk/data_kader', [SkController::class, 'data_kader'])->name('sk.data_kader');
+        Route::resource('/sk', SkController::class);
 
         Route::get('/pengeluaran/data', [PengeluaranController::class, 'data'])->name('pengeluaran.data');
         Route::resource('/pengeluaran', PengeluaranController::class);

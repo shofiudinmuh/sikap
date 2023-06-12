@@ -61,7 +61,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('pembelian.index') }}">
+                <a href="{{ route('sk.index') }}">
                     <i class="fa fa-file"></i> <span>Data SK</span>
                 </a>
             </li>
@@ -76,17 +76,17 @@
                     <i class="fa fa-money"></i> <span>Payroll</span>
                 </a>
             </li>
-            <li>
+            {{-- <li>
                 <a href="{{ route('transaksi.baru') }}">
                     <i class="fa fa-cart-arrow-down"></i> <span>Transaksi Baru</span>
                 </a>
-            </li>
-            <li class="header">REPORT</li>
+            </li> --}}
+            {{-- <li class="header">REPORT</li>
             <li>
                 <a href="{{ route('laporan.index') }}">
                     <i class="fa fa-file-pdf-o"></i> <span>Laporan</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="header">SYSTEM</li>
             <li>
                 <a href="{{ route('user.index') }}">
