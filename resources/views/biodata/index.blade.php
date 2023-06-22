@@ -14,8 +14,6 @@ Biodata Kader
     <div class="col-lg-12">
         <div class="box">
             <div class="box-header with-border">
-                {{-- <button onclick="addForm('{{ route('biodata.store') }}')"
-                    class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah</button> --}}
                 <a href="{{ route('biodata.create') }}" class="btn btn-success btn-xs btn-flat"><i
                         class="fa fa-plus-circle"></i>Tambah</a>
             </div>

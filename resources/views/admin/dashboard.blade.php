@@ -71,7 +71,7 @@ Dashboard
             <div class="icon">
                 <i class="fa fa-truck"></i>
             </div>
-            <a href="{{ route('supplier.index') }}" class="small-box-footer">Lihat <i
+            <a href="{{ route('produk.index') }}" class="small-box-footer">Lihat <i
                     class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>

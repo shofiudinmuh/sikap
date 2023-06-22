@@ -78,7 +78,7 @@ Daftar Kecamatan
 
     function addForm(url) {
         $('#modal-form').modal('show');
-        $('#modal-form .modal-title').text('Tambah kecamatan');
+        $('#modal-form .modal-title').text('Tambah Puskesmas');
 
         $('#modal-form form')[0].reset();
         $('#modal-form form').attr('action', url);
@@ -88,7 +88,7 @@ Daftar Kecamatan
 
     function editForm(url) {
         $('#modal-form').modal('show');
-        $('#modal-form .modal-title').text('Edit kecamatan');
+        $('#modal-form .modal-title').text('Edit Puskesmas');
 
         $('#modal-form form')[0].reset();
         $('#modal-form form').attr('action', url);

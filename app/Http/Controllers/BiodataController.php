@@ -97,7 +97,6 @@ class BiodataController extends Controller
 
         $biodata->save();
 
-        // return response()->json('Data berhasil disimpan', 200);
         return redirect(route('biodata.index'))->with('toast_success', 'Data Kader Berhasil Disimpan');
     }
 
@@ -112,7 +111,6 @@ class BiodataController extends Controller
         $biodata = Biodata::with('bank', 'kota', 'kecamatan', 'desa')->findOrFail($id);
 
         return view('biodata.show', compact('biodata'));
-        // return response()->json($biodata);
     }
 
     //controller riwayat jabatan
