@@ -46,8 +46,8 @@ class BiodataController extends Controller
             ->addColumn('aksi', function ($biodata) {
                 return '
             <div class="btn-group">
-                <a href="' . route('biodata.show', $biodata->id_biodata) . '" class="btn btn-xs btn-primary btn-flat"><i class="fa fa-eye"></i></a>
-                <a href="' . route('biodata.edit', $biodata->id_biodata) . '" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></a>
+                <a href="' . route('biodata.detail', $biodata->id_biodata) . '" class="btn btn-xs btn-primary btn-flat"><i class="fa fa-eye"></i></a>
+                <button onclick="editForm(`' . route('biodata.update', $biodata->id_biodata) . '`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
                 <button onclick="deleteData(`' . route('biodata.destroy', $biodata->id_biodata) . '`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
                 </div>
             ';
@@ -110,7 +110,8 @@ class BiodataController extends Controller
     {
         $biodata = Biodata::with('bank', 'kota', 'kecamatan', 'desa')->findOrFail($id);
 
-        return view('biodata.show', compact('biodata'));
+        // return view('biodata.show', compact('biodata'));
+        return response()->json($biodata);
     }
 
     //controller riwayat jabatan
@@ -125,14 +126,11 @@ class BiodataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function detail($id)
     {
         $biodata = Biodata::with('bank', 'kota', 'kecamatan', 'desa')->findOrFail($id);
-        $kota = Kota::all()->pluck('nama_kota', 'id_kota');
-        $kecamatan = Kecamatan::all()->pluck('nama_kecamatan', 'id_kecamatan');
-        $kelurahan = Kelurahan::all()->pluck('nama_desa', 'id_desa');
-        $bank = Bank::all()->pluck('nama_bank', 'id_bank');
-        return view('biodata.edit', compact('biodata', 'kota', 'kelurahan', 'kecamatan', 'bank'));
+
+        return view('biodata.show', ['biodata' => $biodata]);
     }
 
     /**
@@ -142,9 +140,9 @@ class BiodataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $biodata = Biodata::findOrFail($request->id);
+        $biodata = Biodata::findOrFail($id);
         $biodata->nik = $request->nik;
         $biodata->nama_kader = $request->nama_kader;
         $biodata->tempat_lahir = $request->tempat_lahir;
@@ -167,8 +165,8 @@ class BiodataController extends Controller
 
         $biodata->update();
 
-        // return response()->json('Data berhasil disimpan', 200);
-        return redirect(route('biodata.index'))->with('toast_success', 'Data Kader Berhasil Disimpan');
+        return response()->json('Data berhasil disimpan', 200);
+        // return redirect(route('biodata.index'))->with('toast_success', 'Data Kader Berhasil Disimpan');
     }
 
     /**

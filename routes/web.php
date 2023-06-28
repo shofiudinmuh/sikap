@@ -51,6 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Route::get('/biodata/{$id}/riwayat', [BiodataController::class, 'riwayat'])->name('biodata.riwayat');
         Route::resource('/biodata', BiodataController::class);
         Route::resource('/biodata/riwayatjabatan', RiwayatJabatanController::class);
+        Route::get('/biodata/{id}/detail', [App\Http\Controllers\BiodataController::class, 'detail'])->name('biodata.detail');
 
         Route::get('/bank/data', [BankController::class, 'data'])->name('bank.data');
         Route::resource('/bank', BankController::class);

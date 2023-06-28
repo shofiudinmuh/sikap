@@ -14,8 +14,8 @@ Biodata Kader
     <div class="col-lg-12">
         <div class="box">
             <div class="box-header with-border">
-                <a href="{{ route('biodata.create') }}" class="btn btn-success btn-xs btn-flat"><i
-                        class="fa fa-plus-circle"></i>Tambah</a>
+                <button onclick="addForm('{{ route('biodata.store') }}')" class="btn btn-success btn-xs btn-flat"><i
+                        class="fa fa-plus-circle"></i> Tambah</button>
             </div>
             <div class="box-body table-responsive">
                 <table class="table table-stiped table-bordered">
@@ -60,19 +60,34 @@ Biodata Kader
                 {data: 'aksi', searchable: false, sortable: false},
             ]
         });
-
         $('#modal-form').validator().on('submit', function (e) {
-            if (! e.preventDefault()) {
-                $.post($('#modal-form form').attr('action'), $('#modal-form form').serialize())
-                    .done((response) => {
-                        $('#modal-form').modal('hide');
-                        table.ajax.reload();
-                    })
-                    .fail((errors) => {
-                        alert('Tidak dapat menyimpan data');
-                        return;
+            e.preventDefault();
+
+            let formData = new FormData($('#modal-form form')[0]);
+
+            $.ajax({
+                url: $('#modal-form form').attr('action'),
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (response) {
+
+                    $('#modal-form').modal('hide');
+                    table.ajax.reload();
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Data berhasil disimpan',
+                    showConfirmButton: false,
+                    timer: 1500
                     });
-            }
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseJSON.errors);
+                    alert('Tidak dapat menyimpan data');
+                }
+            });
         });
     });
 
@@ -81,6 +96,7 @@ Biodata Kader
         $('#modal-form .modal-title').text('Tambah Kader');
 
         $('#modal-form form')[0].reset();
+        $('#modal-form form').attr('enctype', 'multipart/form-data');
         $('#modal-form form').attr('action', url);
         $('#modal-form [name=_method]').val('post');
         $('#modal-form [name=nama_kader]').focus();
@@ -91,6 +107,7 @@ Biodata Kader
         $('#modal-form .modal-title').text('Edit Kader');
 
         $('#modal-form form')[0].reset();
+        $('#modal-form form').attr('enctype', 'multipart/form-data');
         $('#modal-form form').attr('action', url);
         $('#modal-form [name=_method]').val('put');
         $('#modal-form [name=nama_kader]').focus();
@@ -109,6 +126,9 @@ Biodata Kader
                 $('#modal-form [name=id_kecamatan]').val(response.id_kecamatan);
                 $('#modal-form [name=id_desa]').val(response.id_desa);
                 $('#modal-form [name=id_kota]').val(response.id_kota);
+                if (response.foto) {
+                    $('#tampil_foto').attr('src', response.foto);
+                }
             })
             .fail((errors) => {
                 alert('Tidak dapat menampilkan data');

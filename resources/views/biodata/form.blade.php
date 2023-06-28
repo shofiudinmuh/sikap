@@ -1,6 +1,6 @@
 <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form">
     <div class="modal-dialog modal-lg" role="document">
-        <form action="" method="post" class="form-horizontal">
+        <form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
             @csrf
             @method('post')
 
@@ -115,6 +115,16 @@
                                 @endforeach
                             </select>
                             <span class="help-block with-errors"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="path_foto" class="col-lg-2 col-lg-offset-1 control-label">Foto</label>
+                        <div class="col-lg-4">
+                            <input type="file" name="path_foto" class="form-control" id="path_foto"
+                                onchange="preview('.tampil_foto', this.files[0])">
+                            <span class="help-block with-errors"></span>
+                            <br>
+                            <div class="tampil_foto"></div>
                         </div>
                     </div>
                 </div>
