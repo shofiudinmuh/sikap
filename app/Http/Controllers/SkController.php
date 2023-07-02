@@ -9,6 +9,7 @@ use App\Models\RiwayatJabatan;
 use App\Http\Controllers\Controller;
 use App\Models\Biodata;
 use App\Models\Jabatan;
+use App\Models\Puskesmas;
 use App\Models\Sk;
 
 class SkController extends Controller
@@ -79,11 +80,12 @@ class SkController extends Controller
     {
         $kecamatan = Kecamatan::all()->pluck('nama_kecamatan', 'id_kecamatan');
         $kelurahan = Kelurahan::all()->pluck('nama_desa', 'id_desa');
+        $puskesmas = Puskesmas::all()->pluck('nama_puskesmas', 'id_puskesmas');
         $jabatan = Jabatan::all()->pluck('nama_jabatan', 'id_jabatan');
         $biodata = Biodata::all();
 
         // dd($biodata)->all();
-        return view('sk.create', compact('kecamatan', 'kelurahan', 'jabatan'));
+        return view('sk.create', compact('kecamatan', 'kelurahan', 'jabatan', 'puskesmas'));
     }
 
     /**
@@ -113,7 +115,10 @@ class SkController extends Controller
             'id_biodata' => $request->id_biodata,
             'id_desa' => $request->id_desa,
             'id_kecamatan' => $request->id_kecamatan,
+            'id_puskesmas' => $request->id_puskesmas,
         ]);
+
+        return redirect()->route('sk.index')->with('toast_success', 'SK berhasil disimpan!');
     }
 
     /**

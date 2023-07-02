@@ -56,6 +56,18 @@ Tambah Kader
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="id_puskesmas" class="col-lg-2 col-lg-offset-1 control-label">Puskesmas</label>
+                        <div class="col-lg-6">
+                            <select name="id_puskesmas" id="id_puskesmas" class="form-control" required>
+                                <option value="">Pilih Puskesmas</option>
+                                @foreach ($puskesmas as $key => $item)
+                                <option value="{{ $key }}">{{ $item }}</option>
+                                @endforeach
+                            </select>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="id_kecamatan" class="col-lg-2 col-lg-offset-1 control-label">Kecamatan</label>
                         <div class="col-lg-6">
                             <select name="id_kecamatan" id="id_kecamatan" class="form-control" required>

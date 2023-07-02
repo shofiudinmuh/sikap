@@ -33,4 +33,8 @@ class RiwayatJabatan extends Model
     {
         return $this->belongsTo(Jabatan::class, 'id_jabatan');
     }
+    public function puskesmas()
+    {
+        return $this->belongsTo(Puskesmas::class, 'id_puskesmas');
+    }
 }

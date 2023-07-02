@@ -24,6 +24,7 @@ Riwayat Jabatan
                         <th>Nomor SK</th>
                         <th>Tahun</th>
                         <th>Honor</th>
+                        <th>Puskesmas</th>
                         <th>Kelurahan</th>
                         <th>Kecamatan</th>
                         {{-- <th width="15%"><i class="fa fa-cog"></i></th> --}}
@@ -35,6 +36,7 @@ Riwayat Jabatan
                         <td>{{ $item->sk->no_sk }}</td>
                         <td>{{ $item->tahun }}</td>
                         <td>{{ $item->jabatan->gaji }}</td>
+                        <td>{{ $item->puskesmas->nama_puskesmas }}</td>
                         <td>{{ $item->desa->nama_desa }}</td>
                         <td>{{ $item->kecamatan->nama_kecamatan }}</td>
                         @endforeach

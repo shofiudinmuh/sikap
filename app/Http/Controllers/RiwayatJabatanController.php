@@ -47,7 +47,7 @@ class RiwayatJabatanController extends Controller
      */
     public function show($id)
     {
-        $riwayat_jabatan = RiwayatJabatan::with('sk', 'biodata', 'kecamatan', 'desa', 'jabatan')->where('id_biodata', $id)->get();
+        $riwayat_jabatan = RiwayatJabatan::with('sk', 'biodata', 'kecamatan', 'desa', 'jabatan', 'puskesmas')->where('id_biodata', $id)->get();
         // return datatables()
         //     ->of($riwayat_jabatan)
         //     ->addIndexColumn()
